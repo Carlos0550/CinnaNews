@@ -20,8 +20,10 @@ export const AppContextProvider = ({ children }) => {
     
     const findNews = async() => {
         try {
-            const response = await Axios.get(`https://newsapi.org/v2/everything?q=${search}&apiKey=${API_KEY}`);
-            setNews(response.data)
+            if (search.trim != "") {
+                const response = await Axios.get(`https://newsdata.io/api/1/news?&language=es&apikey=${API_KEY}&q=${search}`);
+            setNews(response.data.results)
+            }
         } catch (error) {
             console.log(error)
         }
